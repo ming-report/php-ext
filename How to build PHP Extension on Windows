@@ -1,0 +1,88 @@
+How to build PHP Extension on Windows
+
+Take APCu for Example
+Download from PECL
+https://pecl.php.net/get/APCu
+
+Extract Source to extensions folder
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src\ext\apcu
+
+Invoke VS 2017 x64 Native Tools Command Prompt with Administrator Privileges
+C:\Windows\System32> cd C:\php-sdk
+
+C:\php-sdk> phpsdk-starter.bat -c vc15 -a x64
+[vcvarsall.bat] Environment initialized for: ‘x64’
+
+PHP SDK 2.1.10
+
+OS architecture: 64-bit
+Build architecture: 64-bit
+Visual C++: 15
+PHP-SDK path: C:\php-sdk
+
+C:\php-sdk
+$ cd C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ nmake clean
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ buildconf --force
+Rebuilding configure.js
+Now run ‘configure --help’
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ configure --disable-all --enable-cli --enable-apcu=shared
+
+PHP Version: 7.2.15
+
+Saving configure options to config.nice.bat
+Checking for cl.exe … <in default path>
+Detected compiler MSVC15 (Visual C++ 2017)
+Detected 64-bit compiler
+Checking for link.exe … C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64
+Checking for nmake.exe … <in default path>
+Checking for lib.exe … <in default path>
+Checking for bison.exe … <in default path>
+Checking for sed.exe … <in default path>
+Checking for re2c.exe … <in default path>
+Detected re2c version 1.1.1
+Checking for zip.exe … <in default path>
+Checking for lemon.exe … <in default path>
+Checking for mc.exe … C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64
+Checking for mt.exe … C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64
+Enabling multi process build
+
+Build dir: C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src\x64\Release_TS
+PHP Core: php7ts.dll and php7ts.lib
+
+Checking for wspiapi.h … <in default path>
+Enabling IPv6 support
+Enabling SAPI sapi\cli
+Checking for library edit_a.lib;edit.lib … ..\deps\lib\edit_a.lib
+Checking for editline/readline.h … C:\php-sdk\php-dev\vc15\x64\deps\include
+Enabling extension ext\apcu [shared]
+Enabling extension ext\date
+Enabling extension ext\pcre
+Enabling extension ext\reflection
+Enabling extension ext\spl
+Checking for timelib_config.h … ext/date/lib
+Enabling extension ext\standard
+
+Creating build dirs…
+Generating files…
+Generating Makefile
+Generating main/internal_functions.c
+Generating main/config.w32.h
+Generating phpize
+Done.
+
+…
+
+Type ‘nmake’ to build PHP
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ nmake
+
+Output
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src\x64\Release_TS\php_apcu.dll
