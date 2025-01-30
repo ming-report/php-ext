@@ -1,0 +1,131 @@
+How to build PHP on Windows
+
+for PHP 7.2 or newer
+
+Requirements
+Microsoft Visual Studio 2017
+
+Creater workspace folder
+C:\php-sdk
+
+Download PHP SDK from GitHub
+https://github.com/Microsoft/php-sdk-binary-tools
+
+Extract PHP SDK to C:\php-sdk
+C:\php-sdk\bin
+C:\php-sdk\lib
+C:\php-sdk\msys2
+C:\php-sdk\pgo
+…
+
+Download PHP Source
+https://windows.php.net/download/
+
+Invoke VS 2017 x64 Native Tools Command Prompt with Administrator Privileges
+C:\Windows\System32> cd C:\php-sdk
+
+C:\php-sdk> phpsdk-starter.bat -c vc15 -a x64
+[vcvarsall.bat] Environment initialized for: ‘x64’
+
+PHP SDK 2.1.10
+
+OS architecture: 64-bit
+Build architecture: 64-bit
+Visual C++: 15
+PHP-SDK path: C:\php-sdk
+
+C:\php-sdk
+$ phpsdk_buildtree php-dev
+
+Extract PHP Source
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+
+Download Dependencies
+C:\php-sdk
+$ cd C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ phpsdk_deps -u
+
+Configuration: 7.2-vc15-x64-stable
+
+Processing package ICU-63.1-vc15-x64.zip
+Processing package apache-2.4.28-vc15-x64.zip
+…
+Processing package zlib-1.2.11-vc15-x64.zip
+Processing package libsodium-1.0.16-vc15-x64.zip
+Updates performed successfully.
+Old dependencies backed up into ‘C:\php-sdk\php-dev\vc15\x64\deps.201902091501’.
+
+Compile
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ C:\php-sdk\phpsdk-vc15-x64.bat
+[vcvarsall.bat] Environment initialized for: ‘x64’
+
+PHP SDK 2.1.10
+
+OS architecture: 64-bit
+Build architecture: 64-bit
+Visual C++: 15
+PHP-SDK path: C:\php-sdk
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ buildconf
+Rebuilding configure.js
+Now run ‘configure --help’
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+
+$ configure --disable-all --enable-cli
+$ configure --disable-all --enable-cli --disable-zts
+PHP Version: 7.2.15
+
+Saving configure options to config.nice.bat
+Checking for cl.exe … <in default path>
+Detected compiler MSVC15 (Visual C++ 2017)
+Detected 64-bit compiler
+Checking for link.exe … C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64
+Checking for nmake.exe … <in default path>
+Checking for lib.exe … <in default path>
+Checking for bison.exe … <in default path>
+Checking for sed.exe … <in default path>
+Checking for re2c.exe … <in default path>
+Detected re2c version 1.1.1
+Checking for zip.exe … <in default path>
+Checking for lemon.exe … <in default path>
+Checking for mc.exe … C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64
+Checking for mt.exe … C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x64
+Enabling multi process build
+
+Build dir: C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src\x64\Release_TS
+PHP Core: php7ts.dll and php7ts.lib
+
+Checking for wspiapi.h … <in default path>
+Enabling IPv6 support
+Enabling SAPI sapi\cli
+Checking for library edit_a.lib;edit.lib … ..\deps\lib\edit_a.lib
+Checking for editline/readline.h … C:\php-sdk\php-dev\vc15\x64\deps\include
+Enabling extension ext\date
+Enabling extension ext\pcre
+Enabling extension ext\reflection
+Enabling extension ext\spl
+Checking for timelib_config.h … ext/date/lib
+Enabling extension ext\standard
+
+Creating build dirs…
+Generating files…
+Generating Makefile
+Generating main/internal_functions.c
+Generating main/config.w32.h
+Generating phpize
+Done.
+
+…
+
+Type ‘nmake’ to build PHP
+
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src
+$ nmake
+
+Output
+C:\php-sdk\php-dev\vc15\x64\php-7.2.15-src\x64\Release_TS
